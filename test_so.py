@@ -1,0 +1,62 @@
+# coding=utf-8
+
+'''
+@license: LiXiangping
+@author: LiXiangping
+@description: python调用c动态库
+@date: 
+'''
+
+import ctypes
+
+testso = ctypes.CDLL('libtest.so')
+
+# int float测试
+def int_test():
+	print('test:add int:', testso.add(10, 20))
+	print(float(20.1))
+    # 显示声明参数和期望返回类型
+	testso.addFloat.argtypes = [ctypes.c_int, ctypes.c_float]
+	testso.addFloat.restype = ctypes.c_float
+	print('test add float:', testso.addFloat(10,  20.4))
+
+# 字符串的传入和获取
+def str_test():
+	# 获取字符串地址
+	addr = testso.getVersion()  
+	data = ctypes.string_at(addr,-1).decode('utf-8')
+	print('python :',data)
+
+	# 传入字符串
+	addr = testso.setVersion('version 1.0'.encode())
+	data = ctypes.string_at(addr,-1).decode('utf-8')
+	print('python :',data)
+
+
+
+class Person(ctypes.Structure):
+	_fields_ = [('name', ctypes.c_char*10),
+			('age', ctypes.c_int)]
+
+
+# 设置结构体参数
+def struct_test():
+	func_set_person = testso.setPerson
+	func_set_person.restype = ctypes.c_int
+	func_set_person.argtypes = [Person]
+	person = Person()
+	person.age = 20
+	person.name = 'robin'.encode()
+	testso.setPerson(person)
+
+	func_get_person = testso.getPerson
+	func_get_person.restype = Person
+	person = testso.getPerson()
+	print(person.name)
+	print(person.age)
+
+
+if __name__ == '__main__':
+	math_test()
+	str_test()
+	struct_test()
