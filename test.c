@@ -41,3 +41,19 @@ int setPerson(Person person){
 	return 0;
 }
 
+
+// 回调函数
+int getAge(int(*callback)(int), int a){
+	if(callback == NULL){
+		return -1;
+	}
+
+	int age = 0;
+	age = callback(a);
+	printf("age : %d\n", age);
+	if(age <= 0){
+		return -2;
+	}
+	return 0;
+}
+

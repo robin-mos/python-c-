@@ -1,7 +1,9 @@
 # coding=utf-8
 
 '''
-@license: LiXiangping
+@license: LiXiangpinge
+@version: 1.0
+@release: 1.0
 @author: LiXiangping
 @description: python调用c动态库
 @date: 
@@ -56,7 +58,22 @@ def struct_test():
 	print(person.age)
 
 
+
+
+def callback_func(age = 0):
+	age += 5
+	return age
+
+
+def callback_test():
+	# 定义回调函数类型，设置回调函数参数格式，第一个参数为返回值类型
+	typecallback = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_int)  
+	result = testso.getAge(typecallback(callback_func),-1)
+	print('回调函数执行:%d'%result)
+
+
 if __name__ == '__main__':
-	math_test()
+	int_test()
 	str_test()
 	struct_test()
+	callback_test()
