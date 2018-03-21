@@ -21,3 +21,4 @@ char * setVersion(char* version);
 Person getPerson();
 int setPerson(Person person);
 int getAge(int(*callback)(int), int);
+void setIntArray(int array[], int);

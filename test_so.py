@@ -72,8 +72,20 @@ def callback_test():
 	print('回调函数执行:%d'%result)
 
 
+# 传入数组
+def int_array_test():
+	size = 10
+	input = ctypes.c_int*size
+	int_array = input()
+	for i in range(size):
+		int_array[i] = i+4
+
+	testso.setIntArray(int_array, size)
+
+
 if __name__ == '__main__':
 	int_test()
 	str_test()
 	struct_test()
 	callback_test()
+	int_array_test()

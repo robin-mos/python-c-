@@ -57,3 +57,13 @@ int getAge(int(*callback)(int), int a){
 	return 0;
 }
 
+
+//设置数组
+void setIntArray(int array[], int len){
+	int i = 0;
+
+	for(i = 0; i < len;i++){
+		printf("%d\n", array[i]);
+	}
+}
+
