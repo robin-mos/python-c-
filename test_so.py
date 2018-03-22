@@ -11,6 +11,8 @@
 
 import ctypes
 
+
+# 连接打开so库
 testso = ctypes.CDLL('libtest.so')
 
 # int float测试
