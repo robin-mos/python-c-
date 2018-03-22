@@ -15,10 +15,17 @@ typedef struct Person{
 }Person;
 
 int add(int a, int b);
+
 float addFloat(int a, float b);
+
 char * getVersion(void);
+
 char * setVersion(char* version);
+
 Person getPerson();
+
 int setPerson(Person person);
+
 int getAge(int(*callback)(int), int);
+
 void setIntArray(int array[], int);
